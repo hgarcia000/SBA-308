@@ -82,11 +82,34 @@ const CourseInfo = {
 //   console.log(today)
 //   console.log(dueDate);
 
-  
+  function validateIdMatch(course, ag){
+    if(ag.course_id !== course.id){
+      throw new Error("Invalid Course ID!");
+      
+    }
+  }
+
+  function validateDateFormat(ag, submissions) {
+    const pattern = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+    ag.assignments.forEach(element => {
+      if(!pattern.test(element.due_at)){
+        throw new Error("Invalid Due Date Format!");
+      }
+    });
+
+    submissions.forEach(el => {
+      if(!pattern.test(el.submission.submitted_at)){
+        throw new Error("Invalid Date Submitted Format!");
+      }
+    });
+  }
   function getLearnerData(course, ag, submissions) {
     // here, we would process this data to achieve the desired result.
+    try {
     const learners = [];
     let objTemplate = {};
+    validateIdMatch(course, ag);
+    validateDateFormat(ag, submissions);
 
     // initializing a learner's max score
     let maxScore = 0;
@@ -207,6 +230,9 @@ const CourseInfo = {
     // ];
   
     return arr;
+  } catch (error) {
+    console.log(error.message)
+  }
   }
 
 
