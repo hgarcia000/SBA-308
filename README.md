@@ -1,1 +1,3 @@
 # SBA-308
+
+This application gathers assignment data from several students and converts them into percentages as well as take the total weighted average between all past due assignments. If an assignment is submitted after the posted due date, 10 percent of the assignment's total score is deducted from the assignment score when calculating the percentage of each assignment. This apllication also incorporates minor data validation so that dates are the proper format and the course id and assignment course id are equalized, otherwise they throw an error.
